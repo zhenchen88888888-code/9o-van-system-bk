@@ -1,0 +1,398 @@
+/* ========================================
+   機場接送模組專用樣式
+   ======================================== */
+
+/* ========================================
+   主容器
+   ======================================== */
+#airport-booking-app {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+#airport-booking-form {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+/* ========================================
+   機場選擇區塊
+   ======================================== */
+.airport-selection {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.airport-option {
+    position: relative;
+    padding: 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.airport-option:hover {
+    border-color: var(--primary);
+    background: var(--bg-light);
+}
+
+.airport-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.airport-option input[type="radio"]:checked + .airport-label {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.airport-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.airport-icon {
+    font-size: 2rem;
+}
+
+.airport-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.airport-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* ========================================
+   服務類型選擇
+   ======================================== */
+.service-type-selection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.service-option {
+    position: relative;
+}
+
+.service-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.service-label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.service-label:hover {
+    border-color: var(--primary);
+    background: var(--bg-light);
+}
+
+.service-option input[type="radio"]:checked + .service-label {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.service-icon {
+    font-size: 1.5rem;
+}
+
+.service-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.service-desc {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* ========================================
+   來回程切換
+   ======================================== */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.toggle-switch input[type="checkbox"] {
+    width: 0;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+}
+
+.switch-label {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    background: #ddd;
+    border-radius: 13px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.switch-handle {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + .switch-label {
+    background: var(--primary);
+}
+
+.toggle-switch input[type="checkbox"]:checked + .switch-label .switch-handle {
+    transform: translateX(24px);
+}
+
+.switch-text {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.return-trip-details {
+    background: var(--bg-light);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.return-trip-note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #e8f5e9;
+    border-radius: 6px;
+    color: #2e7d32;
+    font-size: 0.9rem;
+}
+
+/* ========================================
+   中途停靠樣式
+   ======================================== */
+.stopover-details {
+    background: var(--bg-light);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.stopover-validation {
+    margin-top: 10px;
+}
+
+.validation-loading,
+.validation-success,
+.validation-error {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.validation-loading {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.validation-success {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.validation-error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* ========================================
+   偏遠地區通知
+   ======================================== */
+.remote-area-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: #fff3e0;
+    border: 1px solid #ffcc80;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.notice-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.notice-content {
+    flex: 1;
+}
+
+.notice-title {
+    font-weight: 600;
+    color: #e65100;
+    margin-bottom: 5px;
+}
+
+.notice-message {
+    color: #bf360c;
+    font-size: 0.9rem;
+}
+
+/* ========================================
+   航班資訊區塊
+   ======================================== */
+#flight-section .form-row {
+    gap: 15px;
+}
+
+#flight-section input,
+#flight-section select {
+    width: 100%;
+}
+
+/* ========================================
+   時間選擇
+   ======================================== */
+.night-time-notice {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    background: #e8eaf6;
+    border: 1px solid #9fa8da;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+.night-time-notice .notice-icon {
+    color: #3f51b5;
+}
+
+.night-time-notice .notice-title {
+    color: #303f9f;
+}
+
+.night-time-notice .notice-message {
+    color: #283593;
+}
+
+/* ========================================
+   價格顯示區塊
+   ======================================== */
+.price-display {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    margin-top: 20px;
+    overflow: hidden;
+}
+
+.price-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 20px;
+}
+
+.price-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+#price-content {
+    padding: 20px;
+}
+
+.price-error {
+    color: var(--danger);
+    text-align: center;
+    padding: 20px;
+}
+
+/* ========================================
+   響應式設計
+   ======================================== */
+@media (max-width: 768px) {
+    #airport-booking-app {
+        padding: 10px;
+    }
+    
+    .airport-selection {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-type-selection {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-label {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .toggle-switch {
+        align-self: flex-start;
+    }
+}
