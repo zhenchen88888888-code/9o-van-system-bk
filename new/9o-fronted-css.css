@@ -1,0 +1,968 @@
+/* ========================================
+   9O預約系統統一樣式 V7.0
+   整合機場接送與包車旅遊系統
+   ======================================== */
+
+/* 統一的根變數定義 */
+:root {
+    --primary: #94989C;
+    --primary-dark: #7a7e82;
+    --secondary: #A8A094;
+    --danger: #dc2626;
+    --warning: #f59e0b;
+    --success: #16a34a;
+    --border: #D4CFC4;
+    --bg-light: #F5F2EE;
+    --text-main: #3C3834;
+    --text-sub: #5C5854;
+    --accent: #C8C2B8;
+    --radius: 8px;
+    --shadow: 0 1px 3px rgba(148,152,156,0.1);
+}
+
+/* ========================================
+   通用基礎樣式
+   ======================================== */
+#airport-booking-app,
+#charter-booking-app {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.booking-container {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 30px;
+}
+
+#airport-booking-form,
+#charter-booking-form {
+    background: white;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.form-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    color: var(--text-sub);
+    font-size: 18px;
+}
+
+/* ========================================
+   表單頭部
+   ======================================== */
+.form-header {
+    background: var(--primary);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+.form-header h2 {
+    margin: 0 0 10px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.form-header p {
+    margin: 0;
+    opacity: 0.95;
+    font-size: 16px;
+}
+
+/* ========================================
+   表單區塊
+   ======================================== */
+.form-section {
+    padding: 25px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.form-section:last-child {
+    border: none;
+}
+
+.form-section h3 {
+    margin: 0 0 20px;
+    font-size: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+/* ========================================
+   表單列與群組
+   ======================================== */
+.form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.form-row.full-width {
+    grid-template-columns: 1fr;
+}
+
+.form-row.triple {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 6px;
+    color: var(--text-sub);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.form-group label.stop-label {
+    margin-top: 15px;
+    margin-bottom: 12px;
+}
+
+.form-group label .required {
+    color: var(--danger);
+}
+
+/* ========================================
+   表單輸入元素
+   ======================================== */
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 15px;
+    transition: all 0.2s;
+    min-height: 44px;
+    width: 100%;
+    box-sizing: border-box;
+    background: white;
+    -webkit-appearance: none;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(148,152,156,0.1);
+}
+
+/* 日期時間輸入優化 */
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* ========================================
+   Radio按鈕卡片式設計（共用）
+   ======================================== */
+.radio-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.radio-item {
+    position: relative;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.radio-item:hover {
+    border-color: var(--primary);
+    background: var(--bg-light);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.radio-item input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-item label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-main);
+    line-height: 1.3;
+    margin: 0 !important;
+    font-weight: 500;
+    width: 100%;
+}
+
+.radio-item label .price {
+    display: block;
+    font-size: 11px;
+    color: var(--text-sub);
+    margin-top: 3px;
+    font-weight: 400;
+}
+
+.radio-item.selected {
+    border-color: var(--primary);
+    background: var(--bg-light);
+    box-shadow: 0 0 0 2px rgba(148,152,156,0.15);
+}
+
+.radio-item.selected::after {
+    content: "✓";
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 18px;
+    height: 18px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+}
+
+/* ========================================
+   停靠點容器（共用）
+   ======================================== */
+.stops-container {
+    margin-top: 12px;
+}
+
+.stop-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    background: white;
+    padding: 8px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+}
+
+.stop-item input {
+    flex: 1;
+    min-width: 0;
+    border: none !important;
+    padding: 8px !important;
+    background: transparent !important;
+}
+
+.stop-controls {
+    display: flex;
+    gap: 4px;
+}
+
+.stop-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text-sub);
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stop-btn:hover:not(:disabled) {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.stop-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.stop-btn.delete {
+    color: var(--danger);
+}
+
+.stop-btn.delete:hover {
+    background: var(--danger);
+    color: white;
+    border-color: var(--danger);
+}
+
+/* ========================================
+   按鈕樣式
+   ======================================== */
+.btn-add-stop {
+    padding: 10px 16px;
+    background: var(--secondary);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.btn-add-stop:hover {
+    background: #968876;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-submit {
+    background: var(--primary);
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 20px;
+    min-height: 50px;
+}
+
+.btn-submit:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(148,152,156,0.3);
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ========================================
+   提示框與警告
+   ======================================== */
+.info-box, 
+.safety-alert {
+    background: var(--bg-light);
+    border-left: 4px solid var(--secondary);
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-main);
+    margin: 20px 0;
+}
+
+.safety-alert {
+    background: rgba(245, 158, 11, 0.08);
+    border-left-color: var(--warning);
+    color: #92400e;
+}
+
+.safety-alert strong {
+    color: #b45309;
+}
+
+.email-notice {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* ========================================
+   機場接送系統專用樣式
+   ======================================== */
+.return-section {
+    background: var(--bg-light);
+}
+
+.return-section h3 {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: white;
+    padding: 12px 20px;
+    margin: -25px -25px 20px -25px;
+}
+
+.pickup-fields,
+.dropoff-fields,
+.return-pickup-fields,
+.return-dropoff-fields {
+    transition: all 0.3s;
+}
+
+/* ========================================
+   包車旅遊系統專用樣式
+   ======================================== */
+.day-route-container {
+    background: var(--bg-light);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 1px solid var(--border);
+    transition: all 0.2s;
+}
+
+.day-route-container:hover {
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.day-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.day-badge {
+    background: var(--primary);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.day-date {
+    color: var(--text-sub);
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+/* 地址自動完成 */
+.address-input-wrapper {
+    position: relative;
+}
+
+.address-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 var(--radius) var(--radius);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.address-suggestions.show {
+    display: block;
+}
+
+.suggestion-item {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.suggestion-item:hover {
+    background: var(--bg-light);
+}
+
+.suggestion-main {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.suggestion-secondary {
+    font-size: 12px;
+    color: var(--text-sub);
+    margin-top: 2px;
+}
+
+/* 警告框 */
+.alert-box {
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    display: none;
+}
+
+.alert-box.show {
+    display: block;
+}
+
+.mountain-alert {
+    background: #fef3c7;
+    border-left: 4px solid var(--warning);
+    color: #92400e;
+}
+
+.excluded-alert {
+    background: #fee2e2;
+    border-left: 4px solid var(--danger);
+    color: #991b1b;
+}
+
+/* ========================================
+   即時報價面板（共用樣式）
+   ======================================== */
+#price-panel {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 0;
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+#price-panel h3 {
+    margin: 0;
+    padding: 20px 25px;
+    background: var(--primary);
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#price-panel h3:before {
+    content: "💰";
+    font-size: 20px;
+}
+
+.price-content {
+    padding: 20px 25px 25px;
+    background: white;
+}
+
+.price-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    color: var(--text-sub);
+    font-size: 14px;
+}
+
+/* 價格項目 */
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.price-item:hover {
+    padding-left: 5px;
+}
+
+.price-item span:first-child {
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.price-item span:last-child {
+    color: var(--primary);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* 細節項目 */
+.price-item.detail {
+    padding-left: 20px;
+    font-size: 13px;
+    border-bottom: 1px dashed #f9fafb;
+}
+
+.price-item.detail span:first-child {
+    color: var(--text-sub);
+    font-weight: 400;
+}
+
+.price-item.detail span:last-child {
+    color: var(--text-sub);
+}
+
+.price-item.free {
+    color: var(--success);
+}
+
+/* 總計區塊 */
+.price-total {
+    margin-top: 20px;
+    padding: 16px 14px;
+    background: var(--bg-light);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--primary);
+}
+
+.price-total span:first-child {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+}
+
+.price-total span:last-child {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+/* 停靠點詳情 */
+.stopover-details {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.stopover-details .detail-item {
+    padding: 2px 0;
+    color: #666;
+}
+
+/* 偏遠地區提示 */
+.remote-area-notice {
+    margin-top: 15px;
+    padding: 10px;
+    background: #fff4e5;
+    border-left: 3px solid #ff9800;
+    border-radius: 4px;
+    color: #666;
+}
+
+.remote-area-notice small {
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* 地區標記（包車專用） */
+.price-region {
+    background: #f3f4f6;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.price-region:before {
+    content: "📍";
+    font-size: 16px;
+}
+
+.price-region.south {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* 山區項目 */
+.price-item.mountain {
+    background: #fef3c7;
+    padding: 10px 14px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border-left: 3px solid var(--warning);
+    border-bottom: none;
+}
+
+.price-item.mountain span:first-child {
+    color: #92400e;
+    font-weight: 600;
+}
+
+.price-item.mountain span:last-child {
+    color: #92400e;
+    font-weight: 700;
+}
+
+/* 訂金資訊 */
+.deposit-info {
+    margin-top: 15px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.deposit-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    font-size: 14px;
+}
+
+.deposit-item:first-child {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 12px;
+}
+
+.deposit-item:last-child {
+    padding-top: 12px;
+}
+
+.deposit-item span:first-child {
+    color: var(--text-sub);
+}
+
+.deposit-item span:last-child {
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* 提醒框 */
+.notice-box {
+    background: #fef3c7;
+    border-left: 4px solid var(--warning);
+    padding: 12px 15px;
+    margin-top: 15px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.5;
+}
+
+.notice-box strong {
+    color: #b45309;
+}
+
+/* ========================================
+   動畫效果
+   ======================================== */
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ========================================
+   響應式設計
+   ======================================== */
+@media (max-width: 1024px) {
+    .booking-container {
+        grid-template-columns: 1fr;
+    }
+    
+    #price-panel {
+        position: relative;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    #airport-booking-app,
+    #charter-booking-app {
+        padding: 10px;
+    }
+    
+    .form-section {
+        padding: 15px;
+    }
+    
+    .form-header {
+        padding: 20px 15px;
+    }
+    
+    .form-header h2 {
+        font-size: 22px;
+    }
+    
+    /* 表單列改為單欄 */
+    .form-row,
+    .form-row.triple {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* 手機版radio按鈕保持2列 */
+    .radio-group {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    
+    .radio-item {
+        padding: 10px 8px;
+    }
+    
+    .radio-item label {
+        font-size: 12px;
+    }
+    
+    .day-route-container {
+        padding: 15px;
+    }
+    
+    /* 日期欄位優化 */
+    .day-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .day-date {
+        font-size: 13px;
+        word-break: break-word;
+    }
+    
+    .stop-item {
+        padding: 6px;
+        gap: 6px;
+    }
+    
+    .stop-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px;
+        padding: 12px;
+        min-height: 48px;
+    }
+    
+    /* 特別處理日期輸入 */
+    input[type="date"],
+    input[type="time"] {
+        font-size: 16px;
+    }
+    
+    .btn-add-stop {
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+    }
+    
+    .btn-submit {
+        padding: 16px;
+        font-size: 17px;
+        min-height: 54px;
+    }
+    
+    /* 價格面板手機版調整 */
+    #price-panel h3 {
+        padding: 15px 20px;
+        font-size: 16px;
+    }
+    
+    .price-content {
+        padding: 15px 20px 20px;
+    }
+    
+    .price-total {
+        padding: 15px 12px;
+    }
+    
+    .price-total span:first-child {
+        font-size: 12px;
+    }
+    
+    .price-total span:last-child {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 380px) {
+    .form-section {
+        padding: 12px;
+    }
+    
+    .form-section h3 {
+        font-size: 18px;
+    }
+    
+    .radio-item {
+        padding: 8px 6px;
+    }
+    
+    .radio-item label {
+        font-size: 11px;
+    }
+    
+    .stop-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .form-group label {
+        font-size: 13px;
+    }
+    
+    .price-total span:last-child {
+        font-size: 18px;
+    }
+}
